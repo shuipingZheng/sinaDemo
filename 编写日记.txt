@@ -1,0 +1,53 @@
+2017.12.11
+
+1.安装之后遇到的问题是 sass 编译问题，需要同时安装 sass-loader node-sass vue-style-loader -D 
+
+2.解决第一个问题之后遇到的是路由问题，这个项目是模拟新浪微博app，需要在底部添加nav导航，
+1)  首先在app.vue  引入  nav.vue
+	<template> 需要添加 <my-nav></my-nav>
+	注意 ： 因为nav 是html5 标签  所以 在template 里面不能用 nav 
+
+	import nav from '@/components/nav' 
+2)  路由的配置，这里截取一部分代码
+	在这里学到重定向  redirect ，自己理解是 path'/' 路径重定向为 '/home' 设置默认页，嗯，应该是这样
+	{	//首页
+    	path: '/',
+    	redirect: '/home' //重定向
+    },{
+    	//首页第一个
+    	path: '/home',
+        component: home
+    } 
+
+2017.12.20
+1.从子组件修改父组件数据
+
+子组件 
+ <li @click="selectNav('home')"><router-link to="/"><i class="iconfont icon-home icon"></i><span>微博</span></router-link></li>
+  methods: {
+    selectNav :function( type ){
+       this.$emit('nav-type',type);
+    }
+  }
+
+  父组件
+  {{msg}}
+  <my-nav @nav-type='changeTop'></my-nav>
+   methods:{
+    changeTop: function(pval){
+      this.msg = pval
+    }
+  }
+通过子组件点击触发 this.$emit 监听父组件 nav-type ，从而父组件 changeTop 方法 去修改参数
+
+
+
+
+2017-12-25
+
+1.js引入问题，如 rem.js
+
+在main.js里面引入即可
+
+import './common/js/rem.js'
+
