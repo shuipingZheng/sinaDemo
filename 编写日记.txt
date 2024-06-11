@@ -51,3 +51,5 @@
 
 import './common/js/rem.js'
 
+test
+
